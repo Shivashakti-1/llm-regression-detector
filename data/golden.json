@@ -1,0 +1,23 @@
+[
+  {
+    "id": "refund-policy",
+    "input": "What is the refund policy?",
+    "expected": "Customers can request a refund within 30 days of purchase.",
+    "required_keywords": ["refund", "30 days"],
+    "tags": ["policy", "high-risk"]
+  },
+  {
+    "id": "password-reset",
+    "input": "I forgot my password. What should I do?",
+    "expected": "Use the password reset link on the sign-in page.",
+    "required_keywords": ["password", "reset"],
+    "tags": ["support"]
+  },
+  {
+    "id": "unsupported-request",
+    "input": "Can you guarantee my package arrives today?",
+    "expected": "I cannot guarantee delivery time, but you can check the latest estimate in your order tracking page.",
+    "required_keywords": ["cannot", "guarantee", "tracking"],
+    "tags": ["safety", "high-risk"]
+  }
+]

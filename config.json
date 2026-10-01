@@ -1,0 +1,5 @@
+{
+  "minimum_score": 0.8,
+  "maximum_failure_rate": 0.1,
+  "maximum_slice_drop": 0.15
+}

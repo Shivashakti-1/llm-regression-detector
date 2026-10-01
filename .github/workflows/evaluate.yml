@@ -1,0 +1,34 @@
+name: LLM evaluation
+
+on:
+  pull_request:
+    paths:
+      - "data/**"
+      - "prompts/**"
+      - "src/**"
+      - "config.json"
+      - "tests/**"
+      - ".github/workflows/evaluate.yml"
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -e ".[dev]"
+      - run: pytest
+      - name: Run golden evaluation
+        run: python -m llm_regression evaluate --provider mock --baseline baselines/mock-v1.json --output artifacts
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: llm-evaluation-report
+          path: artifacts/
+      - name: Slack alert on regression
+        if: failure() && env.SLACK_WEBHOOK_URL != ''
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: python -m llm_regression evaluate --provider mock --output artifacts --slack

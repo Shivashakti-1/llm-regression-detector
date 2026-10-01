@@ -1,0 +1,5 @@
+[
+  {"id": "refund-policy", "score": 1.0},
+  {"id": "password-reset", "score": 1.0},
+  {"id": "unsupported-request", "score": 1.0}
+]
